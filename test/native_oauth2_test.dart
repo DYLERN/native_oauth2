@@ -7,9 +7,19 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockNativeOauth2Platform
     with MockPlatformInterfaceMixin
     implements NativeOauth2Platform {
-
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Future<AuthenticationResponse?> authenticate({
+    required OAuthProvider provider,
+    required Uri redirectUri,
+    required List<String> scope,
+    required String responseType,
+    required String responseMode,
+    required String? prompt,
+    required String? codeChallenge,
+    required String? codeChallengeMethod,
+    required Map<String, dynamic> otherParams,
+  }) async =>
+      AuthenticationResponse(code: 'abc');
 }
 
 void main() {
@@ -19,11 +29,21 @@ void main() {
     expect(initialPlatform, isInstanceOf<MethodChannelNativeOauth2>());
   });
 
-  test('getPlatformVersion', () async {
+  test('authenticate', () async {
     NativeOauth2 nativeOauth2Plugin = NativeOauth2();
     MockNativeOauth2Platform fakePlatform = MockNativeOauth2Platform();
     NativeOauth2Platform.instance = fakePlatform;
 
-    expect(await nativeOauth2Plugin.getPlatformVersion(), '42');
+    final authenticationResult = await nativeOauth2Plugin.authenticate(
+      provider: const OAuthProvider(
+        authUrlAuthority: 'authUrlAuthority',
+        authUrlPath: 'authUrlPath',
+        clientId: 'clientId',
+      ),
+      redirectUri: Uri.parse(''),
+      scope: [],
+    );
+
+    expect(authenticationResult?.code, 'abc');
   });
 }
