@@ -21,6 +21,8 @@ Then run `flutter pub get` to install
 Authenticate with an arbitrary OAuth 2.0 provider:
 
 ```dart
+import 'package:native_oauth2/native_oauth2.dart';
+
 void login() async {
   final plugin = NativeOAuth2();
 
