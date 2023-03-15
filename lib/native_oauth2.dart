@@ -8,6 +8,7 @@ export 'authentication_result.dart';
 export 'o_auth_provider.dart';
 
 class NativeOAuth2 {
+  /// Authenticate a user with some OAuth 2.0 provider.
   Future<AuthenticationResult?> authenticate({
     required OAuthProvider provider,
     required Uri redirectUri,
