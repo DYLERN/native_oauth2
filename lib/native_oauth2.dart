@@ -1,12 +1,11 @@
 library native_oauth2;
 
-import 'package:native_oauth2/authentication_response.dart';
-import 'package:native_oauth2/o_auth_provider.dart';
-
+import 'authentication_response.dart';
 import 'native_oauth2_platform_interface.dart';
+import 'o_auth_provider.dart';
 
-export 'package:native_oauth2/authentication_response.dart';
-export 'package:native_oauth2/o_auth_provider.dart';
+export 'authentication_response.dart';
+export 'o_auth_provider.dart';
 
 class NativeOauth2 {
   Future<AuthenticationResponse?> authenticate({
