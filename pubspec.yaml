@@ -1,6 +1,6 @@
 name: native_oauth2
 description: A Flutter plugin for authenticating with OAuth 2.0 providers using native platform APIs.
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/DYLERN/native_oauth2
 
 environment:
