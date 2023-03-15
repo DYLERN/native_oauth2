@@ -8,7 +8,7 @@ class MockNativeOauth2Platform
     with MockPlatformInterfaceMixin
     implements NativeOauth2Platform {
   @override
-  Future<AuthenticationResponse?> authenticate({
+  Future<AuthenticationResult?> authenticate({
     required OAuthProvider provider,
     required Uri redirectUri,
     required List<String> scope,
@@ -19,7 +19,7 @@ class MockNativeOauth2Platform
     required String? codeChallengeMethod,
     required Map<String, dynamic> otherParams,
   }) async =>
-      AuthenticationResponse(code: 'abc');
+      AuthenticationResult(code: 'abc');
 }
 
 void main() {

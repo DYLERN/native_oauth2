@@ -1,7 +1,7 @@
-class AuthenticationResponse {
+class AuthenticationResult {
   final String? code;
 
-  AuthenticationResponse({
+  AuthenticationResult({
     this.code,
   });
 

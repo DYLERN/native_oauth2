@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:native_oauth2/authentication_response.dart';
+import 'package:native_oauth2/authentication_result.dart';
 import 'package:native_oauth2/o_auth_provider.dart';
 
 import 'native_oauth2_platform_interface.dart';
@@ -12,7 +12,7 @@ class MethodChannelNativeOauth2 extends NativeOauth2Platform {
   final methodChannel = const MethodChannel('za.drt/native_oauth2');
 
   @override
-  Future<AuthenticationResponse?> authenticate({
+  Future<AuthenticationResult?> authenticate({
     required OAuthProvider provider,
     required Uri redirectUri,
     required List<String> scope,
@@ -54,6 +54,6 @@ class MethodChannelNativeOauth2 extends NativeOauth2Platform {
     final resultUri = Uri.parse(response);
     final code = resultUri.queryParameters['code'];
 
-    return AuthenticationResponse(code: code);
+    return AuthenticationResult(code: code);
   }
 }

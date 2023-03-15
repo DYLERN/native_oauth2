@@ -1,4 +1,4 @@
-import 'package:native_oauth2/authentication_response.dart';
+import 'package:native_oauth2/authentication_result.dart';
 import 'package:native_oauth2/o_auth_provider.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -25,7 +25,7 @@ abstract class NativeOauth2Platform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<AuthenticationResponse?> authenticate({
+  Future<AuthenticationResult?> authenticate({
     required OAuthProvider provider,
     required Uri redirectUri,
     required List<String> scope,
