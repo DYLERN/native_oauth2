@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _nativeOauth2Plugin = NativeOauth2();
+  final _nativeOAuth2Plugin = NativeOAuth2();
 
   final authorityController = TextEditingController();
   final pathController = TextEditingController();
@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
 
     final pkcePair = PkcePair.generate();
 
-    final response = await _nativeOauth2Plugin.authenticate(
+    final response = await _nativeOAuth2Plugin.authenticate(
       provider: provider,
       redirectUri: Uri.parse(redirectUri),
       scope: scope.split(' '),

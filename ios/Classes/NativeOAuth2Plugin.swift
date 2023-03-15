@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class NativeOauth2Plugin: NSObject, FlutterPlugin {
+public class NativeOAuth2Plugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "za.drt/native_oauth2", binaryMessenger: registrar.messenger())
-        let instance = NativeOauth2Plugin()
+        let instance = NativeOAuth2Plugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
     

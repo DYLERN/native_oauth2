@@ -5,8 +5,8 @@ import 'package:native_oauth2/o_auth_provider.dart';
 
 import 'native_oauth2_platform_interface.dart';
 
-/// An implementation of [NativeOauth2Platform] that uses method channels.
-class MethodChannelNativeOauth2 extends NativeOauth2Platform {
+/// An implementation of [NativeOAuth2Platform] that uses method channels.
+class MethodChannelNativeOAuth2 extends NativeOAuth2Platform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('za.drt/native_oauth2');

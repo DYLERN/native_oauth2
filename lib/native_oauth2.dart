@@ -7,7 +7,7 @@ import 'o_auth_provider.dart';
 export 'authentication_result.dart';
 export 'o_auth_provider.dart';
 
-class NativeOauth2 {
+class NativeOAuth2 {
   Future<AuthenticationResult?> authenticate({
     required OAuthProvider provider,
     required Uri redirectUri,
@@ -19,7 +19,7 @@ class NativeOauth2 {
     String? codeChallengeMethod,
     Map<String, dynamic> otherParams = const {},
   }) {
-    return NativeOauth2Platform.instance.authenticate(
+    return NativeOAuth2Platform.instance.authenticate(
       provider: provider,
       redirectUri: redirectUri,
       scope: scope,

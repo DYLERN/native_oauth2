@@ -15,8 +15,8 @@ import io.flutter.plugin.common.PluginRegistry
 import java.util.*
 import kotlin.concurrent.schedule
 
-/** NativeOauth2Plugin */
-class NativeOauth2Plugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegistry.NewIntentListener, PluginRegistry.ActivityResultListener {
+/** NativeOAuth2Plugin */
+class NativeOAuth2Plugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegistry.NewIntentListener, PluginRegistry.ActivityResultListener {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it

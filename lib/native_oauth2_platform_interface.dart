@@ -4,23 +4,23 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'native_oauth2_method_channel.dart';
 
-abstract class NativeOauth2Platform extends PlatformInterface {
-  /// Constructs a NativeOauth2Platform.
-  NativeOauth2Platform() : super(token: _token);
+abstract class NativeOAuth2Platform extends PlatformInterface {
+  /// Constructs a NativeOAuth2Platform.
+  NativeOAuth2Platform() : super(token: _token);
 
   static final Object _token = Object();
 
-  static NativeOauth2Platform _instance = MethodChannelNativeOauth2();
+  static NativeOAuth2Platform _instance = MethodChannelNativeOAuth2();
 
-  /// The default instance of [NativeOauth2Platform] to use.
+  /// The default instance of [NativeOAuth2Platform] to use.
   ///
-  /// Defaults to [MethodChannelNativeOauth2].
-  static NativeOauth2Platform get instance => _instance;
+  /// Defaults to [MethodChannelNativeOAuth2].
+  static NativeOAuth2Platform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [NativeOauth2Platform] when
+  /// platform-specific class that extends [NativeOAuth2Platform] when
   /// they register themselves.
-  static set instance(NativeOauth2Platform instance) {
+  static set instance(NativeOAuth2Platform instance) {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }

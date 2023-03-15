@@ -4,7 +4,7 @@ import 'package:native_oauth2/native_oauth2.dart';
 import 'package:native_oauth2/native_oauth2_method_channel.dart';
 
 void main() {
-  MethodChannelNativeOauth2 platform = MethodChannelNativeOauth2();
+  MethodChannelNativeOAuth2 platform = MethodChannelNativeOAuth2();
   const MethodChannel channel = MethodChannel('za.drt/native_oauth2');
 
   TestWidgetsFlutterBinding.ensureInitialized();

@@ -4,9 +4,9 @@ import 'package:native_oauth2/native_oauth2_platform_interface.dart';
 import 'package:native_oauth2/native_oauth2_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockNativeOauth2Platform
+class MockNativeOAuth2Platform
     with MockPlatformInterfaceMixin
-    implements NativeOauth2Platform {
+    implements NativeOAuth2Platform {
   @override
   Future<AuthenticationResult?> authenticate({
     required OAuthProvider provider,
@@ -23,18 +23,18 @@ class MockNativeOauth2Platform
 }
 
 void main() {
-  final NativeOauth2Platform initialPlatform = NativeOauth2Platform.instance;
+  final NativeOAuth2Platform initialPlatform = NativeOAuth2Platform.instance;
 
-  test('$MethodChannelNativeOauth2 is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelNativeOauth2>());
+  test('$MethodChannelNativeOAuth2 is the default instance', () {
+    expect(initialPlatform, isInstanceOf<MethodChannelNativeOAuth2>());
   });
 
   test('authenticate', () async {
-    NativeOauth2 nativeOauth2Plugin = NativeOauth2();
-    MockNativeOauth2Platform fakePlatform = MockNativeOauth2Platform();
-    NativeOauth2Platform.instance = fakePlatform;
+    NativeOAuth2 nativeOAuth2Plugin = NativeOAuth2();
+    MockNativeOAuth2Platform fakePlatform = MockNativeOAuth2Platform();
+    NativeOAuth2Platform.instance = fakePlatform;
 
-    final authenticationResult = await nativeOauth2Plugin.authenticate(
+    final authenticationResult = await nativeOAuth2Plugin.authenticate(
       provider: const OAuthProvider(
         authUrlAuthority: 'authUrlAuthority',
         authUrlPath: 'authUrlPath',

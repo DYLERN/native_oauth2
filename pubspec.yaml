@@ -22,6 +22,6 @@ flutter:
     platforms:
       android:
         package: za.drt.native_oauth2
-        pluginClass: NativeOauth2Plugin
+        pluginClass: NativeOAuth2Plugin
       ios:
-        pluginClass: NativeOauth2Plugin
+        pluginClass: NativeOAuth2Plugin
