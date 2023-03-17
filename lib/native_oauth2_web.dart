@@ -78,7 +78,9 @@ class NativeOAuth2Web extends NativeOAuth2Platform {
         );
 
         Timer.periodic(const Duration(seconds: 1), (timer) {
-          if (window.closed == true) {
+          if (completer.isCompleted) {
+            timer.cancel();
+          } else if (window.closed == true) {
             completer.complete(null);
             timer.cancel();
           }
