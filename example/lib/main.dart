@@ -27,52 +27,52 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Builder(
         builder: (context) => Scaffold(
-            appBar: AppBar(
-              title: const Text('Native OAuth2 Example App'),
+          appBar: AppBar(
+            title: const Text('Native OAuth2 Example App'),
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: authorityController,
+                  decoration: const InputDecoration(
+                    labelText: 'Auth URI Authority',
+                  ),
+                ),
+                TextField(
+                  controller: pathController,
+                  decoration: const InputDecoration(
+                    labelText: 'Auth URI Path',
+                  ),
+                ),
+                TextField(
+                  controller: clientIdController,
+                  decoration: const InputDecoration(
+                    labelText: 'Client ID',
+                  ),
+                ),
+                TextField(
+                  controller: redirectUriController,
+                  decoration: const InputDecoration(
+                    labelText: 'Redirect URI',
+                  ),
+                ),
+                TextField(
+                  controller: scopeController,
+                  decoration: const InputDecoration(
+                    labelText: 'Scope',
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () => login(context),
+                  child: const Text('LOGIN'),
+                ),
+              ],
             ),
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: authorityController,
-                    decoration: const InputDecoration(
-                      labelText: 'Auth URI Authority',
-                    ),
-                  ),
-                  TextField(
-                    controller: pathController,
-                    decoration: const InputDecoration(
-                      labelText: 'Auth URI Path',
-                    ),
-                  ),
-                  TextField(
-                    controller: clientIdController,
-                    decoration: const InputDecoration(
-                      labelText: 'Client ID',
-                    ),
-                  ),
-                  TextField(
-                    controller: redirectUriController,
-                    decoration: const InputDecoration(
-                      labelText: 'Redirect URI',
-                    ),
-                  ),
-                  TextField(
-                    controller: scopeController,
-                    decoration: const InputDecoration(
-                      labelText: 'Scope',
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => login(context),
-                    child: const Text('LOGIN'),
-                  ),
-                ],
-              ),
-            ),
-          )
+          ),
+        ),
       ),
     );
   }
