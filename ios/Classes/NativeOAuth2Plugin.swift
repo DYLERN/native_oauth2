@@ -13,7 +13,7 @@ public class NativeOAuth2Plugin: NSObject, FlutterPlugin {
         case "authenticate":
             self.authenticate(call: call, result: result)
         default:
-            result(FlutterError(code: "UNSUPPORTED_OPERATION", message: "There exists no ios implementation for the \(call.method) method", details: nil))
+            result(FlutterMethodNotImplemented)
         }
     }
     
@@ -24,16 +24,16 @@ public class NativeOAuth2Plugin: NSObject, FlutterPlugin {
             result(FlutterError(code: "ARGUMENT_ERROR", message: "Failed to parse method call args as dictionary", details: nil))
             return
         }
-        guard let authUrl = args["authUri"] as? String else {
-            result(FlutterError(code: "ARGUMENT_ERROR", message: "authUrl is required", details: nil))
+        guard let authUri = args["authUri"] as? String else {
+            result(FlutterError(code: "ARGUMENT_ERROR", message: "authUri is required", details: nil))
             return
         }
-        guard let urlObject = URL(string: authUrl) else {
-            result(FlutterError(code: "ARGUMENT_ERROR", message: "authUrl muse be a valid URL", details: nil))
+        guard let urlObject = URL(string: authUri) else {
+            result(FlutterError(code: "ARGUMENT_ERROR", message: "authUri muse be a valid URL", details: nil))
             return
         }
         guard let redirectUrlScheme = args["redirectUriScheme"] as? String else {
-            result(FlutterError(code: "ARGUMENT_ERRRO", message: "redirectUrlScheme is required", details: nil))
+            result(FlutterError(code: "ARGUMENT_ERROR", message: "redirectUrlScheme is required", details: nil))
             return
         }
         
