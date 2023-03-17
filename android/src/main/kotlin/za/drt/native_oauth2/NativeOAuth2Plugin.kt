@@ -40,11 +40,7 @@ class NativeOAuth2Plugin : FlutterPlugin, MethodCallHandler, ActivityAware, Plug
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
             "authenticate" -> authenticate(call, result)
-            else -> result.error(
-                    "UNSUPPORTED_OPERATION",
-                    "The ${call.method} operation is not supported on Android",
-                    null
-            )
+            else -> result.notImplemented()
         }
     }
 
@@ -52,7 +48,7 @@ class NativeOAuth2Plugin : FlutterPlugin, MethodCallHandler, ActivityAware, Plug
         val launchUri = call.argument<String>("authUri")
 
         if (launchUri == null) {
-            result.error("MISSING_ARGUMENT", "launchUri argument is required", null)
+            result.error("MISSING_ARGUMENT", "authUri argument is required", null)
             return
         }
 
