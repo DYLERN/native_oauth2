@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:native_oauth2/native_oauth2.dart';
-import 'package:native_oauth2/web_config.dart';
 import 'package:pkce/pkce.dart';
 
 void main() {
