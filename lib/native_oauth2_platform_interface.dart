@@ -1,5 +1,6 @@
 import 'package:native_oauth2/authentication_result.dart';
 import 'package:native_oauth2/o_auth_provider.dart';
+import 'package:native_oauth2/web_config.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'native_oauth2_method_channel.dart';
@@ -35,6 +36,7 @@ abstract class NativeOAuth2Platform extends PlatformInterface {
     required String? codeChallenge,
     required String? codeChallengeMethod,
     required Map<String, dynamic> otherParams,
+    required WebAuthenticationMode webMode,
   }) {
     throw UnimplementedError('authenticate() has not been implemented.');
   }

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:native_oauth2/authentication_result.dart';
 import 'package:native_oauth2/o_auth_provider.dart';
+import 'package:native_oauth2/web_config.dart';
 
 import 'native_oauth2_platform_interface.dart';
 
@@ -22,21 +23,17 @@ class MethodChannelNativeOAuth2 extends NativeOAuth2Platform {
     required String? codeChallenge,
     required String? codeChallengeMethod,
     required Map<String, dynamic> otherParams,
+    required WebAuthenticationMode webMode,
   }) async {
-    final authUri = Uri.https(
-      provider.authUrlAuthority,
-      provider.authUrlPath,
-      {
-        'client_id': provider.clientId,
-        'redirect_uri': redirectUri.toString(),
-        'scope': scope.join(' '),
-        'response_type': responseType,
-        'response_mode': responseMode,
-        'prompt': prompt,
-        'code_challenge': codeChallenge,
-        'code_challenge_method': codeChallengeMethod,
-        ...otherParams
-      }..removeWhere((_, value) => value == null),
+    final authUri = provider.getAuthUri(
+      redirectUri: redirectUri,
+      scope: scope,
+      responseType: responseType,
+      responseMode: responseMode,
+      prompt: prompt,
+      codeChallenge: codeChallenge,
+      codeChallengeMethod: codeChallengeMethod,
+      otherParams: otherParams,
     );
 
     final response = await methodChannel.invokeMethod(

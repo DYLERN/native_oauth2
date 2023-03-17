@@ -1,5 +1,7 @@
 library native_oauth2;
 
+import 'package:native_oauth2/web_config.dart';
+
 import 'authentication_result.dart';
 import 'native_oauth2_platform_interface.dart';
 import 'o_auth_provider.dart';
@@ -19,6 +21,7 @@ class NativeOAuth2 {
     String? codeChallenge,
     String? codeChallengeMethod,
     Map<String, dynamic> otherParams = const {},
+    WebAuthenticationMode webMode = const WebAuthenticationMode.sameTab(),
   }) {
     return NativeOAuth2Platform.instance.authenticate(
       provider: provider,
@@ -30,6 +33,7 @@ class NativeOAuth2 {
       codeChallenge: codeChallenge,
       codeChallengeMethod: codeChallengeMethod,
       otherParams: otherParams,
+      webMode: webMode,
     );
   }
 }

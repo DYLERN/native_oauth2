@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged In</title>
+
+    <style>
+        .center-children-horizontally {
+            display: flex;
+            justify-content: center;
+        }
+
+        .d-inline-block {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="center-children-horizontally">
+    <h1 class="d-inline-block">You have been logged in. You will be redirected shortly</h1>
+</div>
+
+<script>
+    setTimeout(() => {
+        window.opener.postMessage({redirect: window.location.href}, window.location.origin)
+        window.close()
+    }, 1000)
+</script>
+</body>
+</html>

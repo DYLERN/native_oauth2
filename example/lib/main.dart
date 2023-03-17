@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:native_oauth2/native_oauth2.dart';
+import 'package:native_oauth2/web_config.dart';
 import 'package:pkce/pkce.dart';
 
 void main() {
@@ -21,6 +22,8 @@ class _MyAppState extends State<MyApp> {
   final clientIdController = TextEditingController();
   final redirectUriController = TextEditingController();
   final scopeController = TextEditingController();
+
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +68,17 @@ class _MyAppState extends State<MyApp> {
                     labelText: 'Scope',
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () => login(context),
-                  child: const Text('LOGIN'),
+                Builder(
+                  builder: (context) {
+                    if (loading) {
+                      return const CircularProgressIndicator();
+                    } else {
+                      return ElevatedButton(
+                        onPressed: () => login(context),
+                        child: const Text('LOGIN'),
+                      );
+                    }
+                  }
                 ),
               ],
             ),
@@ -92,22 +103,39 @@ class _MyAppState extends State<MyApp> {
 
     final pkcePair = PkcePair.generate();
 
-    final response = await _nativeOAuth2Plugin.authenticate(
-      provider: provider,
-      redirectUri: Uri.parse(redirectUri),
-      scope: scope.split(' '),
-      codeChallenge: pkcePair.codeChallenge,
-      codeChallengeMethod: 'S256',
-      prompt: 'select_account',
-    );
+    try {
+      setState(() {
+        loading = true;
+      });
 
-    if (!mounted) return;
+      final response = await _nativeOAuth2Plugin.authenticate(
+        provider: provider,
+        redirectUri: Uri.parse(redirectUri),
+        scope: scope.split(' '),
+        codeChallenge: pkcePair.codeChallenge,
+        codeChallengeMethod: 'S256',
+        prompt: 'select_account',
+        webMode: const WebAuthenticationMode.popup(
+          windowName: 'Authentication Window Name',
+          width: 400,
+          height: 400,
+          shouldCenter: true,
+        ),
+      );
 
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        content: Text(response.toString()),
-      ),
-    );
+      if (!mounted) return;
+
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          content: Text(response.toString()),
+        ),
+      );
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
+
   }
 }
