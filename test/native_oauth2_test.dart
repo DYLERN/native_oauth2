@@ -19,7 +19,9 @@ class MockNativeOAuth2Platform
     required String? codeChallengeMethod,
     required Map<String, dynamic> otherParams,
   }) async =>
-      AuthenticationResult(code: 'abc');
+      AuthenticationResult(
+        redirect: Uri.parse('scheme://host.name/path?code=abc'),
+      );
 }
 
 void main() {

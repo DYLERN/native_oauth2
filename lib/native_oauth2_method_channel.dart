@@ -51,9 +51,9 @@ class MethodChannelNativeOAuth2 extends NativeOAuth2Platform {
       return null;
     }
 
+    // TODO check format
     final resultUri = Uri.parse(response);
-    final code = resultUri.queryParameters['code'];
 
-    return AuthenticationResult(code: code);
+    return AuthenticationResult(redirect: resultUri);
   }
 }

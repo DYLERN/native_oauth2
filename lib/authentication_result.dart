@@ -1,12 +1,16 @@
 class AuthenticationResult {
-  final String? code;
+  final Uri redirect;
 
-  AuthenticationResult({
-    this.code,
-  });
+  const AuthenticationResult({required this.redirect});
+
+  Map<String, String> get redirectParams => redirect.queryParameters;
+
+  String? get code => redirectParams['code'];
+
+  String? get state => redirectParams['state'];
 
   @override
   String toString() {
-    return 'AuthenticationResponse(code=$code)';
+    return 'AuthenticationResponse(redirect=$redirect)';
   }
 }
