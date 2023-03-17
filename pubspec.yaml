@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
   plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
@@ -25,3 +27,6 @@ flutter:
         pluginClass: NativeOAuth2Plugin
       ios:
         pluginClass: NativeOAuth2Plugin
+      web:
+        pluginClass: NativeOAuth2Web
+        fileName: native_oauth2_web.dart
