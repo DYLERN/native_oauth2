@@ -9,6 +9,11 @@ import 'o_auth_provider.dart';
 export 'authentication_result.dart';
 export 'o_auth_provider.dart';
 
+/// The initial page load url. Used with sameTab authentication on web, after redirecting back to application.
+/// IMPORTANT: This will only have a value when running flutter on web, be sure to check that
+/// kIsWeb is true before trying to reference this value
+late final AuthenticationResult nativeOAuth2SameTabAuthResult;
+
 class NativeOAuth2 {
   /// Authenticate a user with some OAuth 2.0 provider.
   Future<AuthenticationResult?> authenticate({

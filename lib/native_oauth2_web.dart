@@ -18,6 +18,7 @@ class NativeOAuth2Web extends NativeOAuth2Platform {
 
   static void registerWith(Registrar registrar) {
     NativeOAuth2Platform.instance = NativeOAuth2Web();
+    nativeOAuth2SameTabAuthResult = AuthenticationResult(redirect: Uri.base);
   }
 
   @override

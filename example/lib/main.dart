@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:native_oauth2/native_oauth2.dart';
 import 'package:native_oauth2/web_config.dart';
@@ -15,86 +16,72 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _nativeOAuth2Plugin = NativeOAuth2();
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: MainPage(),
+    );
+  }
+}
 
-  final authorityController = TextEditingController();
-  final pathController = TextEditingController();
-  final clientIdController = TextEditingController();
-  final redirectUriController = TextEditingController();
-  final scopeController = TextEditingController();
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  final _nativeOAuth2Plugin = NativeOAuth2();
 
   bool loading = false;
 
+  final authority = '...';
+  final path = '...';
+  final clientId = '...';
+  final redirectUri = Uri.parse('...');
+  final scope = ['openid'];
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (kIsWeb) {
+        final sameTabAuthentication = nativeOAuth2SameTabAuthResult;
+        final redirect = sameTabAuthentication.redirect;
+        // Check if sameTabAuthentication redirect matches redirectUri
+        if (redirect.toString().startsWith(redirectUri.toString())) {
+          showSimpleDialog(sameTabAuthentication);
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Builder(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: const Text('Native OAuth2 Example App'),
-          ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: authorityController,
-                  decoration: const InputDecoration(
-                    labelText: 'Auth URI Authority',
-                  ),
-                ),
-                TextField(
-                  controller: pathController,
-                  decoration: const InputDecoration(
-                    labelText: 'Auth URI Path',
-                  ),
-                ),
-                TextField(
-                  controller: clientIdController,
-                  decoration: const InputDecoration(
-                    labelText: 'Client ID',
-                  ),
-                ),
-                TextField(
-                  controller: redirectUriController,
-                  decoration: const InputDecoration(
-                    labelText: 'Redirect URI',
-                  ),
-                ),
-                TextField(
-                  controller: scopeController,
-                  decoration: const InputDecoration(
-                    labelText: 'Scope',
-                  ),
-                ),
-                Builder(
-                  builder: (context) {
-                    if (loading) {
-                      return const CircularProgressIndicator();
-                    } else {
-                      return ElevatedButton(
-                        onPressed: () => login(context),
-                        child: const Text('LOGIN'),
-                      );
-                    }
-                  }
-                ),
-              ],
-            ),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Native OAuth2 Example App'),
+      ),
+      body: Center(
+        child: Builder(
+          builder: (context) {
+            if (loading) {
+              return const CircularProgressIndicator();
+            } else {
+              return ElevatedButton(
+                onPressed: () => login(context),
+                child: const Text('LOGIN'),
+              );
+            }
+          },
         ),
       ),
     );
   }
 
   void login(BuildContext context) async {
-    final authority = authorityController.text.trim();
-    final path = pathController.text.trim();
-    final clientId = clientIdController.text.trim();
-    final redirectUri = redirectUriController.text.trim();
-    final scope = scopeController.text.trim();
-
     final provider = OAuthProvider(
       authUrlAuthority: authority,
       authUrlPath: path,
@@ -109,33 +96,30 @@ class _MyAppState extends State<MyApp> {
       });
 
       final response = await _nativeOAuth2Plugin.authenticate(
-        provider: provider,
-        redirectUri: Uri.parse(redirectUri),
-        scope: scope.split(' '),
-        codeChallenge: pkcePair.codeChallenge,
-        codeChallengeMethod: 'S256',
-        prompt: 'select_account',
-        webMode: const WebAuthenticationMode.popup(
-          windowName: 'Authentication Window Name',
-          width: 400,
-          height: 400,
-          shouldCenter: true,
-        ),
-      );
+          provider: provider,
+          redirectUri: redirectUri,
+          scope: scope,
+          codeChallenge: pkcePair.codeChallenge,
+          codeChallengeMethod: 'S256',
+          prompt: 'select_account',
+          webMode: const WebAuthenticationMode.sameTab());
 
       if (!mounted) return;
 
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          content: Text(response.toString()),
-        ),
-      );
+      showSimpleDialog(response);
     } finally {
       setState(() {
         loading = false;
       });
     }
+  }
 
+  void showSimpleDialog(Object? obj) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        content: Text(obj.toString()),
+      ),
+    );
   }
 }
