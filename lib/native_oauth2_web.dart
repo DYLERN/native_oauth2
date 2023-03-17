@@ -7,7 +7,6 @@ import 'dart:html' as html show window;
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:native_oauth2/native_oauth2.dart';
-import 'package:native_oauth2/web_config.dart';
 
 import 'native_oauth2_platform_interface.dart';
 
