@@ -1,13 +1,13 @@
 library native_oauth2;
 
-import 'package:native_oauth2/web_config.dart';
-
 import 'authentication_result.dart';
 import 'native_oauth2_platform_interface.dart';
 import 'o_auth_provider.dart';
+import 'web_config.dart';
 
 export 'authentication_result.dart';
 export 'o_auth_provider.dart';
+export 'web_config.dart';
 
 /// The initial page load url. Used with sameTab authentication on web, after redirecting back to application.
 /// IMPORTANT: This will only have a value when running flutter on web, be sure to check that

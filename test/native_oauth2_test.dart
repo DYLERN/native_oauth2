@@ -18,6 +18,7 @@ class MockNativeOAuth2Platform
     required String? codeChallenge,
     required String? codeChallengeMethod,
     required Map<String, dynamic> otherParams,
+    required WebAuthenticationMode webMode,
   }) async =>
       AuthenticationResult(
         redirect: Uri.parse('scheme://host.name/path?code=abc'),

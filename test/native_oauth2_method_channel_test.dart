@@ -33,6 +33,7 @@ void main() {
       codeChallenge: 'codeChallenge',
       codeChallengeMethod: 'codeChallengeMethod',
       otherParams: {},
+      webMode: const WebAuthenticationMode.sameTab(),
     );
 
     expect(result?.code, 'abc');
