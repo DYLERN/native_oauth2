@@ -54,11 +54,13 @@ class NativeOAuth2Plugin : FlutterPlugin, MethodCallHandler, ActivityAware, Plug
 
         redirectListener = { redirectUrl ->
             result.success(redirectUrl)
+            redirectListener = null
             cancelListener = null
         }
         cancelListener = {
             result.success(null)
             redirectListener = null
+            cancelListener = null
         }
 
         displayCustomTab(launchUri)
@@ -80,7 +82,7 @@ class NativeOAuth2Plugin : FlutterPlugin, MethodCallHandler, ActivityAware, Plug
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         return when (requestCode) {
             CHROME_CUSTOM_TABS_REQUEST_CODE -> {
-                Timer().schedule(1000) {
+                Timer().schedule(1500) {
                     cancelListener?.invoke()
                 }
 
