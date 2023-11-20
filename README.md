@@ -14,7 +14,7 @@ Add `native_oauth2` as a dependency in your `pubspec.yaml` file
 
 ```yaml
 dependencies:
-  native_oauth2: ^0.0.1
+  native_oauth2: ^0.1.1
 ```
 
 Then run `flutter pub get` to install

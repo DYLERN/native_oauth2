@@ -10,3 +10,8 @@
 
 * Added web implementation
 * Changed `AuthenticationResult` to store the entire redirect uri
+
+## 0.1.1
+
+* Attempted fix for 'Reply already submitted' errors
+* Upgraded Dart SDK version constraints
